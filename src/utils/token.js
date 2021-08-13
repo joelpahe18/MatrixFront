@@ -1,9 +1,9 @@
 import { TOKEN } from './constants';
 
 export function setToken(token){
-    sessionStorage.setItem(TOKEN, token);
+    localStorage.setItem(TOKEN, token);
 }
 
 export function getToken() {
-    return sessionStorage.getItem(TOKEN);
+    return localStorage.getItem(TOKEN);
 }

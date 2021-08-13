@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Inicio from '../pages/Inicio';
-import Login from '../pages/Login';
+import Auth from '../pages/Auth';
 import { getToken } from '../utils/token';
+import GetAuna from './GetAuna';
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute';
 
@@ -10,7 +11,7 @@ export default function AppRouter() {
 
     const [auth, setAuth] = useState(undefined);
 
-    useEffect(() => {
+    useEffect(() => {        
         const token = getToken();
         if (!token) {
           setAuth(null);
@@ -28,7 +29,7 @@ export default function AppRouter() {
                         <PublicRoute 
                             exact
                             path="/login"
-                            component={Login}
+                            component={Auth}
                             isAuthenticated={!!auth}
                         />
 
@@ -38,6 +39,12 @@ export default function AppRouter() {
                             component={Inicio}
                             isAuthenticated={!!auth}
                         />
+                        
+                        <Route 
+                            exact
+                            path="/login/:acces_token"
+                            component={GetAuna}
+                        />                        
 
                         <Redirect to="/" />
                     </Switch>

@@ -1,0 +1,49 @@
+@import "../../scss/index.scss";
+
+.auth {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $light;
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 20px;
+    background: $white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    max-width: 1050px;
+    width: 100%;
+
+    img {
+      max-width: 55%;
+    }
+
+    .container-form {
+      width: 40%;
+      margin-right: 30px;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  img {
+    max-width: 70px;
+  }
+  .content {
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+  }
+  .container-form {
+    width: 100% !important;
+    margin-left: 30px;
+  }
+}

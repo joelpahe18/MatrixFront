@@ -6,6 +6,30 @@ body {
   padding: 0;
 }
 
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 20px;
+  background: $white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  max-width: 1050px;
+  width: 100%;
+
+  img {
+    max-width: 55%;
+  }
+}
+
+.home-section {
+  position: relative;
+  background-color: $white;
+  height: 100vh;
+  left: 260px;
+  width: calc(100% - 260px);
+  transition: all 0.5s ease;
+}
+
 .ui.form {
   .btn-submit {
     color: $white;
@@ -20,5 +44,20 @@ body {
     &:hover {
       background-color: lighten($color: $primary, $amount: 10);
     }
+  }
+}
+
+@media (max-width: 1000px) {
+  .content {
+    padding: 10px 0;
+    img {
+      max-width: 70px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
   }
 }

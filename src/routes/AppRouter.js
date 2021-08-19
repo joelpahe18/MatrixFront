@@ -1,55 +1,61 @@
-import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import Inicio from '../pages/Inicio';
+import React, { useEffect, } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Auth from '../pages/Auth';
-import { getToken } from '../utils/token';
 import GetAuna from './GetAuna';
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute';
+import { useDispatch, useSelector } from 'react-redux';
+import { startChecking } from '../actions/auth';
+import Entrar from '../pages/Entrar/Entrar';
+import DashboardRoutes from './DashboardRoutes';
 
 export default function AppRouter() {
 
-    const [auth, setAuth] = useState(undefined);
+    const dispatch = useDispatch();
+    
+    const {checking, res} = useSelector(state => state.auth)
 
-    useEffect(() => {        
-        const token = getToken();
-        if (!token) {
-          setAuth(null);
-        }else{
-          setAuth(token);
-        }
-        console.log(auth);
-      }, [auth])
+    useEffect(() => {     
+        dispatch(startChecking())
+      }, [dispatch])
+
+    if (checking){
+        return <h1>Cargando...</h1>
+    }  
 
     return (
-        <div>
-            <Router>
-                <div>
-                    <Switch>
-                        <PublicRoute 
-                            exact
-                            path="/login"
-                            component={Auth}
-                            isAuthenticated={!!auth}
-                        />
+        <Router>
+            <div>
+                <Switch>
+                    <PublicRoute 
+                        exact
+                        path="/login"
+                        component={Auth}
+                        isAuthenticated={!!res}
+                    />
 
-                        <PrivateRoute 
-                            exact
-                            path="/"
-                            component={Inicio}
-                            isAuthenticated={!!auth}
-                        />
-                        
-                        <Route 
-                            exact
-                            path="/login/:acces_token"
-                            component={GetAuna}
-                        />                        
+                    <PublicRoute 
+                        exact
+                        path="/entrar"
+                        component={Entrar}
+                        isAuthenticated={!!res}
+                    />
 
-                        <Redirect to="/" />
-                    </Switch>
-                </div>
-            </Router>
-        </div>
+                    <Route 
+                        exact
+                        path="/login/:acces_token"
+                        component={GetAuna}
+                    /> 
+
+                    <PrivateRoute                         
+                        path="/"
+                        component={DashboardRoutes}
+                        isAuthenticated={!!res}
+                    />
+                    
+                                    
+                </Switch>
+            </div>
+        </Router>
     )
 }

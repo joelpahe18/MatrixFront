@@ -25,12 +25,14 @@
       border: 2px solid transparent !important;
       transition: all 0.3s ease !important;
 
-      &:focus {
+      &:focus,
+      &:valid {
         border-color: $primary !important;
         background-color: #fff !important;
       }
 
-      &:focus ~ label {
+      &:focus ~ label,
+      &:valid ~ label {
         top: 0;
         left: 12px;
         display: 14px;
@@ -38,7 +40,6 @@
         background: $white;
       }
     }
-
     label {
       position: absolute;
       left: 18px;

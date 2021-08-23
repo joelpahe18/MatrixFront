@@ -6,7 +6,6 @@ import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute';
 import { useDispatch, useSelector } from 'react-redux';
 import { startChecking } from '../actions/auth';
-import Entrar from '../pages/Entrar/Entrar';
 import DashboardRoutes from './DashboardRoutes';
 
 export default function AppRouter() {
@@ -31,13 +30,6 @@ export default function AppRouter() {
                         exact
                         path="/login"
                         component={Auth}
-                        isAuthenticated={!!res}
-                    />
-
-                    <PublicRoute 
-                        exact
-                        path="/entrar"
-                        component={Entrar}
                         isAuthenticated={!!res}
                     />
 

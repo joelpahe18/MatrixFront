@@ -5,8 +5,6 @@ import { store } from './store/store';
 
 
 export default function AppMatrix() {
-
-
     return (
         <Provider store={store}>            
             <AppRouter />

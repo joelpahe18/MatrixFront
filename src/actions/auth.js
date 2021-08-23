@@ -31,8 +31,8 @@ export const startChecking = () => {
     
     return async (dispatch) => {
         try {
-            const {data} = await httpConToken.get('/validartoken');            
-            dispatch(Login(data))            
+            const {data} = await httpConToken.get('/validartoken');                         
+            dispatch(Login(data));
         } catch (error) {
             dispatch(checkingFinish());
         }

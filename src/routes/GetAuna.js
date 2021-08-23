@@ -1,16 +1,11 @@
-import React from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { setToken } from '../utils/token';
 
 
-export default function GetAuna() {
-    const {acces_token} = useParams();    
+export default function GetAuna({history}) {
+    const {acces_token} = useParams();   
 
     setToken(acces_token); 
-
-    return (
-        <Redirect 
-            to='/entrar'
-        />
-    )
+    
+    window.location.replace('/');  
 }

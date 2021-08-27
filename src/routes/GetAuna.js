@@ -1,11 +1,10 @@
-import { useParams } from 'react-router-dom';
-import { setToken } from '../utils/token';
+import { useParams } from "react-router-dom";
+import { setToken } from "../utils/token";
 
+export default function GetAuna({ history }) {
+  const { acces_token, ruta } = useParams();
 
-export default function GetAuna({history}) {
-    const {acces_token} = useParams();   
+  setToken(acces_token);
 
-    setToken(acces_token); 
-    
-    window.location.replace('/');  
+  window.location.replace(`/${ruta}`);
 }

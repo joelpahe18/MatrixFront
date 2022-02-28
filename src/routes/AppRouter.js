@@ -32,7 +32,7 @@ export default function AppRouter() {
             isAuthenticated={!!res}
           />
 
-          <Route exact path="/login/:acces_token/:ruta" component={GetAuna} />
+          <Route exact path="/login/:acces_token/:ruta/:wemp_pmla" component={GetAuna} />
 
           <PrivateRoute
             path="/"

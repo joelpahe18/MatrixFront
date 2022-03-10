@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../assets/png/Matrix.png";
 import { Image } from "semantic-ui-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import avatar from "../../assets/png/avatar.png";
 import "./SideBar.scss";
 import { useDispatch, useSelector } from "react-redux";

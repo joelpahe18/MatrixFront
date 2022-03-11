@@ -2,24 +2,14 @@ import React, { useState, useEffect} from 'react';
 import DataTable from '../../../General/DataTable';
 import useData from '../../../hooks/useData';
 import './MatrixMaster.scss';
-
-
-const API = 'http://localhost:8000/api/root/procesos/maestros-matrix/permisos';
-
-
-// const info = [
-//     {
-//         Tabopc: 1,
-//         Tabtab: 2222,
-//     },
-// ]
+import URL from '../../../../utils/config';
 
 
 
 function MyComponent() {
     const [columns, setColumns] = useState([]);
 	const [pending, setPending] = useState(true);
-    let info = useData(API);
+    let info = useData(URL.BASE_URL+"/root/procesos/maestros-matrix/permisos");
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {

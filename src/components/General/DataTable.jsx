@@ -31,7 +31,7 @@ const FilterComponent = ({ filterText, onFilter }) => (
 		<TextField
 			id="search"
 			type="text"
-			placeholder="Filter By Name"
+			placeholder="Filtrar por Tabopc"
 			aria-label="Search Input"
 			value={filterText}
 			onChange={onFilter}
@@ -77,6 +77,10 @@ const CustomLoader = () => (
     <Spinner />
 );
 
+const tryTo = () => (
+    console.log('hiiiiiii')
+);
+
 function DataTableBase(props) {
     const [filterText, setFilterText] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
@@ -98,6 +102,7 @@ function DataTableBase(props) {
                         onClear={handleClear} filterText={filterText} />
         		);
         	}, [filterText, resetPaginationToggle]);
+
 
     return (
         <DataTable

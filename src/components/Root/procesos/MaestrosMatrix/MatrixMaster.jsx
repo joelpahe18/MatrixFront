@@ -1,34 +1,10 @@
-import React, { useState, useEffect} from 'react';
+import React from 'react';
 import DataTable from '../../../General/DataTable';
-import useData from '../../../hooks/useData';
 import './MatrixMaster.scss';
-import URL from '../../../../utils/config';
-
-
+import useInfo from './useInfo';
 
 function MyComponent() {
-    const [columns, setColumns] = useState([]);
-	const [pending, setPending] = useState(true);
-    let info = useData(URL.BASE_URL+"/root/procesos/maestros-matrix/permisos");
-
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setColumns([
-				{
-					name: 'Tabopc',
-					selector: row => row.Tabopc,
-					sortable: true,
-				},
-                {
-					name: 'Tabtab',
-					selector: row => row.Tabtab,
-					sortable: true,
-				},
-			]);
-			setPending(false);
-		}, 2000);
-		return () => clearTimeout(timeout);
-	}, []);
+ const { info, columns, pending, handleButtonClick,} = useInfo();
 
 
     return(

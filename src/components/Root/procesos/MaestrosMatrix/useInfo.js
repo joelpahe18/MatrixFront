@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, } from 'react';
 import useData from '../../../hooks/useData';
 import URL from '../../../../utils/config';
+import { getTableName } from '../../../hooks/useCRUD';
+import { Link } from 'react-router-dom';
 import './MatrixMaster.scss';
 
 
 const useInfo = () => {
     const [columns, setColumns] = useState([]);
 	const [pending, setPending] = useState(true);
-	const [modal, setModal] = useState(false);
     const info = useData(URL.BASE_URL+"/root/procesos/maestros-matrix/permisos");
- 
-	
-	
-	
+	// let navigate = useNavigate();
+
+	// function handleClick() {
+	// 	navigate('/editar-datos-matrix')
+	//   }
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
@@ -29,7 +31,7 @@ const useInfo = () => {
 				},
 				{
 					name: 'Acciones',
-					cell: () => <button onClick={console.log('')}>Action</button>,
+					cell: (row) => <Link to="/root/procesos/maestros-matrix/editar-datos-matrix"><button onClick={() => getTableName(row.Tabtab)}>Ir</button></ Link>,
 					ignoreRowClick: true,
 					allowOverflow: true,
 					button: true,
@@ -44,6 +46,7 @@ const useInfo = () => {
     info,
     columns,
     pending,
+	getTableName,
    }
 };
 

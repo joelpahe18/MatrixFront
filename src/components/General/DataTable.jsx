@@ -4,7 +4,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Spinner from './Spinner';
 import styled from 'styled-components';
 
-
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 
 const sortIcon = <ArrowDownward />;
@@ -77,17 +76,13 @@ const CustomLoader = () => (
     <Spinner />
 );
 
-const tryTo = () => (
-    console.log('hiiiiiii')
-);
-
 function DataTableBase(props) {
     const [filterText, setFilterText] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
     const filteredItems = props.info.filter(
         		item => item.Tabopc && item.Tabopc.toString().toLowerCase().includes(filterText.toLowerCase()),
         	);
-    
+
     const subHeaderComponentMemo = React.useMemo(() => {
         		const handleClear = () => {
         			if (filterText) {
@@ -124,3 +119,10 @@ function DataTableBase(props) {
 }
 
 export default DataTableBase;
+
+
+// const mapStateToProps = (reducers) => {
+//     return reducers.usersReducer;
+//   };
+  
+//   export default connect(mapStateToProps, useRedirect)(DataTableBase);

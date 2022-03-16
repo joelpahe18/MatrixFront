@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { httpConToken } from '../../helpers/http';
 
 const useData = url => {
     const [data, setData] = useState([]);

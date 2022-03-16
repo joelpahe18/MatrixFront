@@ -4,7 +4,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Spinner from './Spinner';
 import styled from 'styled-components';
 
-
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 
 const sortIcon = <ArrowDownward />;
@@ -31,7 +30,7 @@ const FilterComponent = ({ filterText, onFilter }) => (
 		<TextField
 			id="search"
 			type="text"
-			placeholder="Filter By Name"
+			placeholder="Filtrar por Tabopc"
 			aria-label="Search Input"
 			value={filterText}
 			onChange={onFilter}
@@ -83,7 +82,7 @@ function DataTableBase(props) {
     const filteredItems = props.info.filter(
         		item => item.Tabopc && item.Tabopc.toString().toLowerCase().includes(filterText.toLowerCase()),
         	);
-    
+
     const subHeaderComponentMemo = React.useMemo(() => {
         		const handleClear = () => {
         			if (filterText) {
@@ -98,6 +97,7 @@ function DataTableBase(props) {
                         onClear={handleClear} filterText={filterText} />
         		);
         	}, [filterText, resetPaginationToggle]);
+
 
     return (
         <DataTable
@@ -119,3 +119,10 @@ function DataTableBase(props) {
 }
 
 export default DataTableBase;
+
+
+// const mapStateToProps = (reducers) => {
+//     return reducers.usersReducer;
+//   };
+  
+//   export default connect(mapStateToProps, useRedirect)(DataTableBase);

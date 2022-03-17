@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DataTable from '../../../General/DataTable';
 import './MatrixMaster.scss';
-import useInfo from './useInfo';
-import { Link } from 'react-router-dom';
+import useMatrixMaster from './useMatrixMaster';
 
 
 function MatrixMaster() {
- const { info, columns, pending, getTableName, } = useInfo();
-
+ const { info, columns, pending, } = useMatrixMaster();
 
     return(
         <section>
@@ -16,6 +14,18 @@ function MatrixMaster() {
                     Editar datos tabla 
                 </li>
             </nav>
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    Name:
+                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                </label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="Tabopc">Tabopc</option>
+                    <option value="Tabtab">Tabtab</option>
+                </select>
+                <input type="submit" value="Submit" />
+            </form>
             <div className="container">
                 <div className="row">
                     <div className="col">
@@ -24,12 +34,8 @@ function MatrixMaster() {
                                 columns={columns}
                                 info={info} 
                                 progressPending={pending}
-                                getTableName={getTableName}
                             />
                     </div>
-                    <Link to="/root/procesos/maestros-matrix/editar-datos-matrix">
-                    Return
-                    </Link>
                 </div>
             </div>
         </section>

@@ -1,14 +1,16 @@
 import React from 'react';
+import { useParams } from "react-router-dom";
+// import useEditMatrixData from './useEditMatrixData';
 import './MatrixMaster.scss';
 
-
-function EditMatrixData() {
-
+function EditMatrixData(props) {
+    let params  = useParams();
+    // useEditMatrixData(params);
     return(
         <section>
             <nav className="nav justify-content-center">
                 <li className="nav-item">
-                    fffffffffffffffffffffffffffffffffffffff
+                <h2> {params.tableName}</h2>
                 </li>
             </nav>
             <div className="container">

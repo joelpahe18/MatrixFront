@@ -81,7 +81,8 @@ function DataTableBase(props) {
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
     const filteredItems = props.info.filter(
         		item => item.Tabopc && item.Tabopc.toString().toLowerCase().includes(filterText.toLowerCase()),
-        	);
+				);
+				console.log(filteredItems)
 
     const subHeaderComponentMemo = React.useMemo(() => {
         		const handleClear = () => {
@@ -119,10 +120,3 @@ function DataTableBase(props) {
 }
 
 export default DataTableBase;
-
-
-// const mapStateToProps = (reducers) => {
-//     return reducers.usersReducer;
-//   };
-  
-//   export default connect(mapStateToProps, useRedirect)(DataTableBase);

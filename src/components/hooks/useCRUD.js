@@ -1,5 +1,7 @@
 const getTableName = (props) => {
-   return console.log(props);
+
+   
+      return console.log(props);
 };
 
 

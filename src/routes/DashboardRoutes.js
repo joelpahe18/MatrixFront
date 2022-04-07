@@ -1,20 +1,25 @@
 import React from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import MatrixMaster from '../components/Root/procesos/MaestrosMatrix/index';
+import EditMatrixData from '../components/Root/procesos/MaestrosMatrix/EditMatrixData';
+import Inicio from '../pages/Inicio';
 
 
 export default function DashboardRoutes() {
 
 return (
-        <section>     
-            {/* <SideBar />  */}
-            <div className="home-section">
-                <Switch>
-                    <Route exact patch="/root/procesos/maestros-matrix" component={MatrixMaster} />
-                    <Route exact patch="/root/procesos/maestros-matrix/editar-datos-matrix" component={MatrixMaster} />
-                    <Redirect to="/root/procesos/maestros-matrix" />
-                </Switch>
-            </div>
-        </section>  
+        <div>     
+            <Router>
+                {/* <SideBar />  */}
+                <div className="home-section">
+                    <Switch>
+                        <Route exact path="/root/procesos/maestros-matrix" component={MatrixMaster} />,
+                        <Route exact path="/root/procesos/maestros-matrix/editar-datos-matrix/:tableName" component={EditMatrixData} />
+                        <Route exact path="/inicio" component={Inicio} />
+                        <Redirect to="/inicio" />
+                    </Switch>
+                </div>
+            </Router>
+        </div>  
     )
 }

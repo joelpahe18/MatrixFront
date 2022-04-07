@@ -2,12 +2,11 @@ import React from 'react';
 import OverallCreate from './OverallCreate';
 import OverallUpdate from './OverallUpdate';
 import { overallDelete } from '../hooks/useCRUD';
-import { tableHead } from '../hooks/useTable';
+import TableHead  from '../hooks/useTable';
 import { MdCreateNewFolder, MdCreate, MdDelete } from "react-icons/md";
 
 function EditMatrixData(props) {
     const [state, setState] = React.useState({});
-
     const editData = (data) => {
         setState(data)
       }
@@ -16,6 +15,13 @@ function EditMatrixData(props) {
         return (
             props && props.columns ? props.data.map(data => (
                 <tr key={data.id}>
+                    <td>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#OverallUpdate" onClick={() => editData(data)}><MdCreate size={'1.7rem'} /></button>
+                        
+                    </td>
+                    <td>
+                        <button type="button" onClick={() => overallDelete({props, data})}><MdDelete size={'1.7rem'}/></button>
+                    </td>
                     {
                         props && props.columns ? props.columns.filter(column => column !== 'Medico' && column !== 'Fecha_data' && column !== 'Hora_data' && column !== 'Seguridad' && column !== 'id').map((column, index) => (
                             <td key={index}>{data[column]}</td>
@@ -23,6 +29,9 @@ function EditMatrixData(props) {
                     }
                     <td>
                         <button type="button" data-bs-toggle="modal" data-bs-target="#OverallUpdate" onClick={() => editData(data)}><MdCreate size={'1.7rem'} /></button>
+                        
+                    </td>
+                    <td>
                         <button type="button" onClick={() => overallDelete({props, data})}><MdDelete size={'1.7rem'}/></button>
                     </td>
                 </tr>
@@ -43,10 +52,10 @@ function EditMatrixData(props) {
                         </button>
                     </div>
                 </div>
-                <div className="table-responsive caption-top">
+                <div className="caption-top">
                     <table className="table">
                         <thead>
-                            <tr>{ tableHead(props) }</tr>
+                            <tr>{ TableHead(props) }</tr>
                         </thead>
                         <tbody>{ tableBody() }</tbody>
                     </table>

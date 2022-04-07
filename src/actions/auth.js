@@ -8,7 +8,6 @@ export const startLogin = (formData) => {
         try {
             const {data} = await httpSinToken.post('/login', formData);
 
-
             if(data.res){
                 setToken(data.acces_token);
     

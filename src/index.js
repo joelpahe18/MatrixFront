@@ -4,6 +4,7 @@ import AppMatrix from './AppMatrix';
 import 'semantic-ui-css/semantic.min.css';
 import './scss/index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
 
 ReactDOM.render(
     <AppMatrix />,

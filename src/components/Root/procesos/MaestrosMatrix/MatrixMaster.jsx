@@ -1,19 +1,17 @@
 import React from 'react';
 import DataTable from '../../../General/DataTable';
+import useMatrixMaster from './useMatrixMaster';
 import './MatrixMaster.scss';
-import useInfo from './useInfo';
-import { Link } from 'react-router-dom';
 
 
 function MatrixMaster() {
- const { info, columns, pending, getTableName, } = useInfo();
-
+ const { info, columns, pending, } = useMatrixMaster();
 
     return(
         <section>
             <nav className="nav justify-content-center">
                 <li className="nav-item">
-                    Editar datos tabla 
+                    <h2>Editar datos tabla </h2>
                 </li>
             </nav>
             <div className="container">
@@ -24,12 +22,8 @@ function MatrixMaster() {
                                 columns={columns}
                                 info={info} 
                                 progressPending={pending}
-                                getTableName={getTableName}
                             />
                     </div>
-                    <Link to="/root/procesos/maestros-matrix/editar-datos-matrix">
-                    Return
-                    </Link>
                 </div>
             </div>
         </section>

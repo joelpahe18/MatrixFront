@@ -30,7 +30,7 @@ const FilterComponent = ({ filterText, onFilter }) => (
 		<TextField
 			id="search"
 			type="text"
-			placeholder="Filtrar por Tabopc"
+			placeholder="Filtrar por Tabtab"
 			aria-label="Search Input"
 			value={filterText}
 			onChange={onFilter}
@@ -80,9 +80,8 @@ function DataTableBase(props) {
     const [filterText, setFilterText] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
     const filteredItems = props.info.filter(
-        		item => item.Tabopc && item.Tabopc.toString().toLowerCase().includes(filterText.toLowerCase()),
+        		item => item.Tabtab && item.Tabtab.toString().toLowerCase().includes(filterText.toLowerCase()),
 				);
-				console.log(filteredItems)
 
     const subHeaderComponentMemo = React.useMemo(() => {
         		const handleClear = () => {
@@ -98,7 +97,6 @@ function DataTableBase(props) {
                         onClear={handleClear} filterText={filterText} />
         		);
         	}, [filterText, resetPaginationToggle]);
-
 
     return (
         <DataTable

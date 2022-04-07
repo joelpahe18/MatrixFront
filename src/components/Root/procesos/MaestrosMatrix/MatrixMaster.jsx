@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DataTable from '../../../General/DataTable';
-import './MatrixMaster.scss';
 import useMatrixMaster from './useMatrixMaster';
+import './MatrixMaster.scss';
 
 
 function MatrixMaster() {
@@ -11,21 +11,9 @@ function MatrixMaster() {
         <section>
             <nav className="nav justify-content-center">
                 <li className="nav-item">
-                    Editar datos tabla 
+                    <h2>Editar datos tabla </h2>
                 </li>
             </nav>
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Name:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="Tabopc">Tabopc</option>
-                    <option value="Tabtab">Tabtab</option>
-                </select>
-                <input type="submit" value="Submit" />
-            </form>
             <div className="container">
                 <div className="row">
                     <div className="col">

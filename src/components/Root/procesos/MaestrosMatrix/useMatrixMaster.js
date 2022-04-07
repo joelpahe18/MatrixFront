@@ -2,6 +2,7 @@ import React, { useState, useEffect, } from 'react';
 import useData from '../../../hooks/useData';
 import URL from '../../../../utils/config';
 import { Link } from 'react-router-dom';
+import { MdOutlineArrowForward } from "react-icons/md";
 import './MatrixMaster.scss';
 
 
@@ -30,14 +31,14 @@ const useMatrixMaster = () => {
 				},
 				{
 					name: 'Acciones',
-					cell: (row) => <Link to={`/root/procesos/maestros-matrix/editar-datos-matrix/${row.Tabtab}`} ><button>Ir</button></ Link>,
+					cell: (row) => <Link to={`/root/procesos/maestros-matrix/editar-datos-matrix/${row.Tabtab}`} ><button><MdOutlineArrowForward size={'1.5rem'} /></button></ Link>,
 					ignoreRowClick: true,
 					allowOverflow: true,
 					button: true,
 				},
 			]);
 			setPending(false);
-		}, 2000);
+		}, 2300);
 		return () => clearTimeout(timeout);
 	}, []);
 

@@ -2,6 +2,7 @@ import React from 'react';
 import DataTable from '../../../General/DataTable';
 import useMatrixMaster from './useMatrixMaster';
 import './MatrixMaster.scss';
+import Nav from '../../../Nav';
 
 
 function MatrixMaster() {
@@ -9,11 +10,7 @@ function MatrixMaster() {
 
     return(
         <section>
-            <nav className="nav justify-content-center">
-                <li className="nav-item">
-                    <h2>Editar datos tabla </h2>
-                </li>
-            </nav>
+            <Nav version='2022-08-04' />
             <div className="container">
                 <div className="row">
                     <div className="col">

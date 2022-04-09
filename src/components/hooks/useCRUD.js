@@ -65,14 +65,14 @@ const overallUpdate = async ({ props, state }) => {
     });
 };
 
-const overallDelete = async ({ props, data }) => {
+const overallDelete = async ({ params, row }) => {
   await axios
     .delete(
       URL.BASE_URL +
         `/root/procesos/maestros-matrix/editar-datos-matrix/eliminar/` +
-        props.tableName +
+        params.tableName +
         `/` +
-        data.id,
+        row.id,
       {
         headers: { Authorization: `Bearer ${localStorage.acces_token}` },
       }

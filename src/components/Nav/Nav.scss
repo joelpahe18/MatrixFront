@@ -1,0 +1,24 @@
+@import "../../scss/index.scss";
+
+.nav-matrix-master {
+    background-color: #C3D9FF;
+    padding: 0.3rem;
+}
+
+.nav-last-modification {
+    background-color: #E8EEF7;
+    padding: 0.3rem;
+}
+
+.nav-item{
+    text-align: end;
+}
+
+.title{
+    text-align: center;
+    font-weight: bold;
+}
+
+.version{
+    margin-right: 20px;
+}

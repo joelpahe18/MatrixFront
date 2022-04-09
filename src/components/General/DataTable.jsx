@@ -42,7 +42,7 @@ const FilterComponent = ({ filterText, onFilter }) => (
 const customStyles = {
     	header: {
     		style: {
-    			minHeight: '56px',
+    			Height: '56px',
     		},
     	},
     	headRow: {
@@ -58,6 +58,7 @@ const customStyles = {
     				borderRightStyle: 'solid',
     				borderRightWidth: '1px',
     				borderRightColor: 'gray',
+					
     			},
     		},
     	},
@@ -67,7 +68,10 @@ const customStyles = {
     				borderRightStyle: 'solid',
     				borderRightWidth: '1px',
     				borderRightColor: 'gray',
+					fontSize: '11px',
+					fontWeight: 'bold',
     			},
+		
     		},
     	},
     };

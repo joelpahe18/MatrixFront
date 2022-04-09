@@ -1,7 +1,3 @@
-nav {
-    background-color: #C3D9FF;
-    padding: 0.5em;
-}
 
 option {
     background-color: #2694e8;
@@ -10,4 +6,18 @@ option {
 button {
     background-color: transparent;
     border: none;
+}
+
+.rdt_TableHeadRow{
+    background: #2A5DB0 !important;
+    color: white;
+    font-weight: bold;
+}
+
+.rdt_TableRow:nth-child(odd) {
+    background-color: #E8EEF7;
+}
+
+.rdt_TableRow:nth-child(even) {
+    background-color: #C3D9FF;
 }

@@ -7,10 +7,10 @@ export default function Nav({ version = "" }) {
   return (
     <>
       <nav className="nav justify-content-center">
-        <div class="col-1">
+        <div className="col-1">
           <Image src="http://matrix.lasamericas.com.co/matrix/images/medical/root/cliame.jpg" />
         </div>
-        <div class="col-11">
+        <div className="col-11">
           <li className="nav-item nav-matrix-master mx-auto">
             <h2 className="title">EDITAR DATOS TABLA</h2>
           </li>

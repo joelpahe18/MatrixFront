@@ -23,8 +23,8 @@ function EditMatrixData() {
         <section>
             <Nav version='2022-08-04' />
             <div className="container">
-                <div class="row">
-                    <div class="col-11">
+                <div className="row">
+                    <div className="col-11">
                         <Link to={`/root/procesos/maestros-matrix`} ><button><MdArrowBack size={'1.5rem'} /></button></ Link>
                     </div>
                     <div className='col-1'>
@@ -38,7 +38,11 @@ function EditMatrixData() {
                         {
                            tableInfo.columns && tableInfo.info && 
                            (
-                               <DynamicDataTable title={params.tableOption} data={tableInfo.info} pending={pending} columns={tableInfo.columns}/>
+                               <DynamicDataTable 
+                                 title={params.tableOption} 
+                                 data={tableInfo.info} 
+                                 progressPending={pending} 
+                                 columns={tableInfo.columns}/>
                             )  
                         }
                     </div>

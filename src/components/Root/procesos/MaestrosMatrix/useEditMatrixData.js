@@ -102,15 +102,14 @@ const useEditMatrixData = (params, editData) => {
             info: data.data,
           });
         });
-      setPending(false);
+      const timeout = setTimeout(() => {
+        setPending(false);
+      }, 2000);
+      return () => clearTimeout(timeout);
     };
 
     getData();
 
-    const timeout = setTimeout(() => {
-      setPending(false);
-    }, 2000);
-    return () => clearTimeout(timeout);
   }, []);
 
   return {

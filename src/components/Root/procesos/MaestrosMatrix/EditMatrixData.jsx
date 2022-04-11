@@ -16,6 +16,7 @@ function EditMatrixData() {
     const editData = (data) => {
         setState(data)
     }
+    
     const {  tableInfo, pending, columnsCreate, columnsUpdate } = useEditMatrixData(params, editData);
 
     return(

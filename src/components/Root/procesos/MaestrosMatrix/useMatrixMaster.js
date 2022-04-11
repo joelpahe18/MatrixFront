@@ -5,6 +5,15 @@ import { Link } from "react-router-dom";
 import { MdOutlineArrowForward } from "react-icons/md";
 import "./MatrixMaster.scss";
 
+const CustomTitle = ({ row }) => (
+  <div
+    data-tag="allowRowEvents"
+    style={{ overflow: 'hidden', whiteSpace: 'wrap', textOverflow: 'ellipses' }}
+  >
+    {row.Tabopc}
+  </div>
+);
+
 const useMatrixMaster = () => {
   const [columns, setColumns] = useState([]);
   const [pending, setPending] = useState(true);
@@ -22,12 +31,13 @@ const useMatrixMaster = () => {
           maxWidth: "40px",
         },
         {
-          name: "Tabopc",
+          name: "Nombre de opcion",
           selector: (row) => row.Tabopc,
           sortable: true,
+          cell: row => <CustomTitle row={row} />
         },
         {
-          name: "Tabtab",
+          name: "Tabla matrix",
           selector: (row) => row.Tabtab,
           sortable: true,
         },

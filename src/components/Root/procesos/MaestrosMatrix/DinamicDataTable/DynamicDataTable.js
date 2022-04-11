@@ -76,7 +76,6 @@ const CustomLoader = () => <Spinner />;
 export default function DynamicDataTable(props) {
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-  console.log(props);
 
   //   const filteredItems = props.info.filter(
   //     (item) =>

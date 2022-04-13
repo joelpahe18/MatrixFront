@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { overallCreate } from '../hooks/useCRUD';
 import "./OverallCreate.scss";
-import {Form, Button, Select} from 'semantic-ui-react';
+import {Form, Button, Select, Dropdown} from 'semantic-ui-react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import { httpConToken } from "../../helpers/http";
@@ -12,11 +12,19 @@ export default function OverallCreate(props) {
     const [types, setTypes] = useState([]);
     const [options, setOptions] = useState({})
     const columns = props.columns.filter(column => column !== 'Medico' && column !== 'Fecha_data' && column !== 'Hora_data' && column !== 'Seguridad' && column !== 'id');
+    
+    
+    const [formData, setFormData] = useState(initialValues(columns))
+    
     const formik = useFormik({
         initialValues: initialValues(columns),
         validationSchema: Yup.object( validation(columns, types) ),
         onSubmit: (formValue) => {
-            console.log(formValue);
+            console.log({
+                ...formData,
+                ...formValue
+            });
+        
         },
     });
 
@@ -81,9 +89,9 @@ export default function OverallCreate(props) {
     }
 
     useEffect( async() => {
+        await getOptions(props.tableName);
         await columnDescription();
         await columnsTypes();
-        await getOptions(props.tableName);
     }, [props.columns])
 
     return (
@@ -136,12 +144,17 @@ export default function OverallCreate(props) {
                                                                             onChange={formik.handleChange}
                                                                             error={formik.errors[column]}
                                                                         />,
-                                                                '5' : <Form.Field
-                                                                            control={Select}
-                                                                            options={genderOptions(types[index]?.comentarios, index)}
-                                                                            placeholder='Seleccione'
+                                                                '5' :   <Dropdown
+                                                                            placeholder='Select Country'
+                                                                            fluid
                                                                             search
-                                                                            searchInput={{ id: 'form-select-control-gender-'+index }}
+                                                                            selection
+                                                                            lazyLoad
+                                                                            onChange={(e,data) => {
+                                                                                formData[column] = data.value
+                                                                                setFormData(formData)
+                                                                            }}
+                                                                            options={genderOptions(types[index]?.comentarios, index)}
                                                                         />
                                                             }[types[index]?.tipo] || <Form.Input 
                                                                                         type='text'

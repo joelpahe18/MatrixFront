@@ -22,41 +22,41 @@ const useMatrixMaster = () => {
   );
 
   useEffect(() => {
+    setColumns([
+      {
+        name: "#",
+        selector: (row, key) => (key = row.id),
+        sortable: true,
+        maxWidth: "40px",
+      },
+      {
+        name: "Nombre de opcion",
+        selector: (row) => row.Tabopc,
+        sortable: true,
+        cell: row => <CustomTitle row={row} />
+      },
+      {
+        name: "Tabla matrix",
+        selector: (row) => row.Tabtab,
+        sortable: true,
+      },
+      {
+        name: "Acciones",
+        cell: (row) => (
+          <Link
+            to={`/root/procesos/maestros-matrix/editar-datos-matrix/${row.Tabtab}/${row.Tabopc}`}
+          >
+            <button>
+              <MdOutlineArrowForward size={"1.5rem"} />
+            </button>
+          </Link>
+        ),
+        ignoreRowClick: true,
+        allowOverflow: true,
+        button: true,
+      },
+    ]);
     const timeout = setTimeout(() => {
-      setColumns([
-        {
-          name: "#",
-          selector: (row, key) => (key = row.id),
-          sortable: true,
-          maxWidth: "40px",
-        },
-        {
-          name: "Nombre de opcion",
-          selector: (row) => row.Tabopc,
-          sortable: true,
-          cell: row => <CustomTitle row={row} />
-        },
-        {
-          name: "Tabla matrix",
-          selector: (row) => row.Tabtab,
-          sortable: true,
-        },
-        {
-          name: "Acciones",
-          cell: (row) => (
-            <Link
-              to={`/root/procesos/maestros-matrix/editar-datos-matrix/${row.Tabtab}/${row.Tabopc}`}
-            >
-              <button>
-                <MdOutlineArrowForward size={"1.5rem"} />
-              </button>
-            </Link>
-          ),
-          ignoreRowClick: true,
-          allowOverflow: true,
-          button: true,
-        },
-      ]);
       setPending(false);
     }, 2300);
     return () => clearTimeout(timeout);

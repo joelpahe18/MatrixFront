@@ -10,9 +10,8 @@ export default function OverallCreate(props) {
 
     const [descriptions, setDescriptions] = useState([]);
     const [types, setTypes] = useState([]);
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState({})
     const columns = props.columns.filter(column => column !== 'Medico' && column !== 'Fecha_data' && column !== 'Hora_data' && column !== 'Seguridad' && column !== 'id');
-
     const formik = useFormik({
         initialValues: initialValues(columns),
         validationSchema: Yup.object( validation(columns, types) ),
@@ -45,15 +44,14 @@ export default function OverallCreate(props) {
               tableName: props.tableName,
             }
           );
-          setTypes(data.data);
-          
+          setTypes(data.data);      
         } catch (error) {
           console.log(error);
           return error;
         }
     };
 
-    const getOptions = async (comentarios) => {
+    const getOptions = async (comentarios, index) => {
         try {
           const { data } = await httpConToken.post(
             "/root/procesos/maestros-matrix/selecciones",
@@ -62,26 +60,30 @@ export default function OverallCreate(props) {
               comentarios: comentarios
             }
           );
-          setOptions(data.data);
+          setOptions(data.data)
+          
         } catch (error) {
           console.log(error);
           return error;
         }
     };
 
-    const genderOptions = (comentarios) => {
-        return (
-            [
-                { key: 'm', text: 'Male', value: 'male' },
-                { key: 'f', text: 'Female', value: 'female' },
-                { key: 'o', text: 'Other', value: 'other' },
-              ]
-        );
+    const genderOptions = (object, index) => {
+
+        if (object && options.length != 0) {
+            return options[index+1];
+        }
+        return [
+            {
+                key: 'No', text: 'No hay opciones', value: 'No'
+            }
+        ];
     }
 
     useEffect( async() => {
         await columnDescription();
         await columnsTypes();
+        await getOptions(props.tableName);
     }, [props.columns])
 
     return (
@@ -136,11 +138,10 @@ export default function OverallCreate(props) {
                                                                         />,
                                                                 '5' : <Form.Field
                                                                             control={Select}
-                                                                            options={genderOptions(types[index]?.comentarios)}
+                                                                            options={genderOptions(types[index]?.comentarios, index)}
                                                                             placeholder='Seleccione'
                                                                             search
                                                                             searchInput={{ id: 'form-select-control-gender-'+index }}
-                                                                            error={formik.errors[column]}
                                                                         />
                                                             }[types[index]?.tipo] || <Form.Input 
                                                                                         type='text'

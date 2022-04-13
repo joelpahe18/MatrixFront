@@ -145,6 +145,10 @@ const useEditMatrixData = (params, editData) => {
       "/root/procesos/maestros-matrix/editar-datos-matrix/" +
       params.tableName;
 
+    const loadingData = () => {
+      setPending(false);
+    }
+
     const getData = () => {
       fetch(url, {
         headers: { Authorization: `Bearer ${localStorage.acces_token}` },
@@ -155,11 +159,10 @@ const useEditMatrixData = (params, editData) => {
             columns: getColumnsNames(data.data, params.tableName),
             info: data.data,
           });
-        });
-      const timeout = setTimeout(() => {
-        setPending(false);
-      }, 2000);
-      return () => clearTimeout(timeout);
+        })
+        .then(
+          () => loadingData()
+        );
     };
 
     getData();

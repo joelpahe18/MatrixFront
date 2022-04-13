@@ -42,8 +42,9 @@ function EditMatrixData() {
                                <DynamicDataTable 
                                  title={params.tableOption} 
                                  data={tableInfo.info} 
-                                 progressPending={pending} 
-                                 columns={tableInfo.columns}/>
+                                 columns={tableInfo.columns}
+                                 progressPending={pending}
+                                />
                             )  
                         }
                     </div>

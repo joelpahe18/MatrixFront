@@ -23,14 +23,13 @@ const generateDynamicObject = ({ typeOperation, props, state }) => {
 
 const overallCreate = async ({ props, state }) => {
   const typeOperation = "create";
-  const overallObject = generateDynamicObject({ typeOperation, props, state });
 
   await axios
     .post(
       URL.BASE_URL +
         `/root/procesos/maestros-matrix/editar-datos-matrix/registrar/` +
         props.tableName,
-      overallObject,
+      state,
       {
         headers: { Authorization: `Bearer ${localStorage.acces_token}` },
       }

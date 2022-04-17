@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { overallCreate } from '../hooks/useCRUD';
 import "./OverallCreate.scss";
-import {Form, Button, Select, Dropdown} from 'semantic-ui-react';
+import {Form, Button, Dropdown, Checkbox} from 'semantic-ui-react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import { httpConToken } from "../../helpers/http";
@@ -10,7 +10,8 @@ export default function OverallCreate(props) {
 
     const [descriptions, setDescriptions] = useState([]);
     const [types, setTypes] = useState([]);
-    const [options, setOptions] = useState({})
+    const [options, setOptions] = useState({});
+    const [relations, setRelations] = useState({});
     const columns = props.columns.filter(column => column !== 'Medico' && column !== 'Fecha_data' && column !== 'Hora_data' && column !== 'Seguridad' && column !== 'id');
     
     
@@ -20,11 +21,11 @@ export default function OverallCreate(props) {
         initialValues: initialValues(columns),
         validationSchema: Yup.object( validation(columns, types) ),
         onSubmit: (formValue) => {
-            console.log({
+            const state = {
                 ...formData,
                 ...formValue
-            });
-        
+            }
+            overallCreate(props, state);
         },
     });
 
@@ -59,13 +60,28 @@ export default function OverallCreate(props) {
         }
     };
 
-    const getOptions = async (comentarios, index) => {
+    const getRelations = async() => {
+        try {
+            const { data } = await httpConToken.post(
+              "/root/procesos/maestros-matrix/relaciones",
+              {
+                tableName: props.tableName,
+              }
+            );
+            setRelations(data.data)
+            
+          } catch (error) {
+            console.log(error);
+            return error;
+          }
+    }
+
+    const getOptions = async () => {
         try {
           const { data } = await httpConToken.post(
             "/root/procesos/maestros-matrix/selecciones",
             {
               tableName: props.tableName,
-              comentarios: comentarios
             }
           );
           setOptions(data.data)
@@ -88,11 +104,26 @@ export default function OverallCreate(props) {
         ];
     }
 
+    const genderRelations = (object, index) => {
+
+        if (object && relations.length != 0) {
+            return relations[index+1];
+        }
+        return [
+            {
+                key: 'No', text: 'No hay opciones', value: 'No'
+            }
+        ];
+    }
+
     useEffect( async() => {
-        await getOptions(props.tableName);
+        await getOptions();
+        await getRelations();
         await columnDescription();
         await columnsTypes();
     }, [props.columns])
+
+    
 
     return (
         <section>
@@ -103,7 +134,7 @@ export default function OverallCreate(props) {
                             <h5 className="modal-title" id="exampleModalLabel">Crear registro en la tabla {props.tableName}</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <Form onSubmit={formik.handleSubmit}>
+                        <Form className='form-modal' onSubmit={formik.handleSubmit}>
                             <div className="modal-body">
                                 
                                     <div className="container">
@@ -145,7 +176,7 @@ export default function OverallCreate(props) {
                                                                             error={formik.errors[column]}
                                                                         />,
                                                                 '5' :   <Dropdown
-                                                                            placeholder='Select Country'
+                                                                            placeholder='Seleccione una opcion'
                                                                             fluid
                                                                             search
                                                                             selection
@@ -155,7 +186,45 @@ export default function OverallCreate(props) {
                                                                                 setFormData(formData)
                                                                             }}
                                                                             options={genderOptions(types[index]?.comentarios, index)}
-                                                                        />
+                                                                        />,
+                                                                '9' :   <Dropdown
+                                                                            placeholder='Seleccione una opcion'
+                                                                            fluid
+                                                                            search
+                                                                            selection
+                                                                            lazyLoad
+                                                                            onChange={(_,data) => {
+                                                                                formData[column] = data.value
+                                                                                setFormData(formData)
+                                                                            }}
+                                                                            options={genderRelations(types[index]?.comentarios, index)}
+                                                                        />,
+                                                                '10' :  <Checkbox
+                                                                        toggle
+                                                                        onChange={(_,data) => {
+                                                                            data.checked ? formData[column] = 'on' : formData[column] = 'off'
+                                                                            setFormData(formData)
+                                                                        }}
+                                                                    />,
+                                                                '11' :  <Form.Input 
+                                                                    type='text'
+                                                                    name = {column}
+                                                                    value={formik.values[column]}
+                                                                    onChange={formik.handleChange}
+                                                                    error={formik.errors[column]}
+                                                                />,
+                                                                '18' :   <Dropdown
+                                                                    placeholder='Seleccione una opcion'
+                                                                    fluid
+                                                                    search
+                                                                    selection
+                                                                    lazyLoad
+                                                                    onChange={(_,data) => {
+                                                                        formData[column] = data.value
+                                                                        setFormData(formData)
+                                                                    }}
+                                                                    options={genderRelations(types[index]?.comentarios, index)}
+                                                                />,
                                                             }[types[index]?.tipo] || <Form.Input 
                                                                                         type='text'
                                                                                         name = {column}
@@ -176,7 +245,7 @@ export default function OverallCreate(props) {
                                 <Button
                                     type="submit"
                                     className="btn-submit"
-                                >Entrar</Button>
+                                >Registrar</Button>
                                 
                             </div>
                         </Form>
@@ -214,6 +283,9 @@ function validation(columns, types) {
                 break;
             case '3':
                 values[column] = Yup.string().matches(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/, "Debe estar en formato YYYY-MM-DD").required("El campo debe estar lleno");
+                break;
+            case '11':
+                values[column] = Yup.string().matches(/^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/, "Debe estar en formato hh:mm:ss").required("El campo debe estar lleno");
                 break;
             default:
                 break;

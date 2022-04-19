@@ -24,7 +24,7 @@ const generateDynamicObject = ({ typeOperation, props, state }) => {
 const overallCreate = async ({ props, state }) => {
   const typeOperation = "create";
   const overallObject = generateDynamicObject({ typeOperation, props, state });
-
+ 
   await axios
     .post(
       URL.BASE_URL +

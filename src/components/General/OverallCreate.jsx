@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { overallCreate } from '../hooks/useCRUD';
 import "./OverallCreate.scss";
-import {Form, Button, Dropdown, Checkbox} from 'semantic-ui-react';
-import {useFormik} from 'formik';
+import { Form, Button, Dropdown, Checkbox } from 'semantic-ui-react';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { httpConToken } from "../../helpers/http";
 
@@ -25,7 +25,8 @@ export default function OverallCreate(props) {
                 ...formData,
                 ...formValue
             }
-            overallCreate(props, state);
+            overallCreate({props, state});
+            // console.log(state)
         },
     });
 
@@ -201,10 +202,13 @@ export default function OverallCreate(props) {
                                                                         />,
                                                                 '10' :  <Checkbox
                                                                         toggle
+                                                                        // defaultValue={formik.values[column] = formData[column] = 'off'}
+                                                                        // value={formik.values[column]}
                                                                         onChange={(_,data) => {
                                                                             data.checked ? formData[column] = 'on' : formData[column] = 'off'
                                                                             setFormData(formData)
                                                                         }}
+                                                                        // checked
                                                                     />,
                                                                 '11' :  <Form.Input 
                                                                     type='text'
